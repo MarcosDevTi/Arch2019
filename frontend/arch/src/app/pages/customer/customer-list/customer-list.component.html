@@ -1,0 +1,71 @@
+<h2 mat-h2>Customers</h2>
+<table mat-table [dataSource]="customers" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="firstName" >
+      <th mat-header-cell *matHeaderCellDef>
+        <app-params-grid
+          [placeHolder]="'First Name'"
+          [head]="'First Name'"
+          [property]="'FirstName'"
+          (paramsSearch)="addParamSearch($event)"
+          (clear)="clear($event)"
+        ></app-params-grid >
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="lastName" >
+      <th mat-header-cell *matHeaderCellDef>
+          <app-params-grid
+          [placeHolder]="'Last Name'"
+          [head]="'Last Name'"
+          [property]="'LastName'"
+          (paramsSearch)="addParamSearch($event)"
+          (clear)="clear($event)"
+        ></app-params-grid >
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="email" >
+      <th mat-header-cell *matHeaderCellDef>
+          <app-params-grid
+            [placeHolder]="'Email'"
+            [head]="'Email'"
+            [property]="'Email'"
+            (paramsSearch)="addParamSearch($event)"
+            (clear)="clear($event)">
+          </app-params-grid >
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="birth-date" >
+      <th mat-header-cell *matHeaderCellDef>
+        <app-params-grid-data-range
+        [placeHolder]="'Birth Date'"
+        (paramsSearch)="addParamSearch($event)"
+        ></app-params-grid-data-range>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.birthDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address" >
+      <th mat-header-cell *matHeaderCellDef>
+          <app-params-grid-complex
+          [head]="'Address'"
+          (paramsListSearch)="addParamsSearch($event)"
+          (paramsSearch)="addParamSearch($event)"
+          (clear)="clear($event)"
+          ></app-params-grid-complex>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

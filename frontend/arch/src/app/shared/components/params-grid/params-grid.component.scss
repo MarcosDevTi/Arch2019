@@ -1,0 +1,37 @@
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+.container {
+  width: 100%;
+}
+
+.head {
+
+}
+
+.input {
+  width: 60%;
+  float: left;
+}
+
+.type {
+  width: 20%;
+  float: left;
+}
+
+.actions {
+  width: 20%;
+  float: left;
+}
+
+// .container-component {
+//   width: 100%;
+// }
+
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+  padding: 0 4px !important;
+  min-width: 0px !important;
+  line-height: 49px !important;
+}

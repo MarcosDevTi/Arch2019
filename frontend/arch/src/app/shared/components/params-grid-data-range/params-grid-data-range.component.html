@@ -1,0 +1,31 @@
+<span class="head" *ngIf="!onOverHead">{{placeHolder}}<button mat-button (click)="addSearchParam()"><i class="material-icons">search</i></button></span>
+<div class="dates" *ngIf="onOverHead">
+  <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-chip
+      *ngFor="let date of dates"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(date)">
+      {{date.display | date: 'dd/MM/yyyy'}} ({{date.comparator}})
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+ <form [formGroup]="gridDataForm" *ngIf="componentVisibility">
+  <mat-form-field *ngIf="step1">
+    <input matInput [min]="dateMin" [max]="dateMax" [matDatepicker]="picker" [placeholder]="placeHolder" formControlName='firstDate' (dateChange)="addDate($event.value)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="type">
+    <mat-label>Comparator</mat-label>
+    <mat-select formControlName="firstDateComparator">
+      <mat-option *ngFor="let comparator of comparatorsData" [value]="comparator">{{comparator}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="actions">
+    <!-- <button mat-button (click)="sendSearch()"><i class="material-icons" style="color: green">save</i></button> -->
+    <button mat-button (click)="clearProp()"><i class="material-icons" style="color: red">clear</i></button>
+  </div>
+ </form>
+</div>
+

@@ -1,0 +1,33 @@
+<span class="head" *ngIf="!onOverHead">{{head}}<button mat-button (click)="addSearchParam()"><i class="material-icons">search</i></button></span>
+<div class="grid-complex" *ngIf="onOverHead">
+  <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-chip
+      *ngFor="let fruit of fruits"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(fruit)">
+      {{fruit.shipDisplay}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+
+  <div class="fild-multiple">
+    <form [formGroup]="formParamsComplexGrid" >
+      <mat-select formControlName="property">
+          <mat-option *ngFor="let prop of properties" [value]="prop">
+            {{prop.display}}
+          </mat-option>
+        </mat-select>
+        <mat-form-field *ngIf="properties.length > 0">
+            <input matInput formControlName="inputSearch">
+          </mat-form-field>
+          <mat-select  formControlName="typeComparator">
+              <mat-option value="==">==</mat-option>
+              <mat-option value="Contains">Contains</mat-option>
+          </mat-select>
+          <button *ngIf="inputSearch.value != '' || inputSearch.value != null" type="button" mat-button (click)="addItem()"><i class="material-icons" style="color: green">add_box</i></button>
+          <button mat-button (click)="clearProp()"><i class="material-icons" style="color: red">clear</i></button>
+        </form>
+  </div>
+
+</div>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Arch.Application\Arch.Application.csproj" />
+    <ProjectReference Include="..\Arch.Infra.Data\Arch.Infra.Data.csproj" />
+    <ProjectReference Include="..\Arch.Infra.Shared\Arch.Infra.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

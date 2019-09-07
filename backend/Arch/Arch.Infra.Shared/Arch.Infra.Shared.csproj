@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Paging\PagedResult.cs" />
+    <Compile Remove="Paging\Paging.cs" />
+    <Compile Remove="Paging\PagingExtensions.cs" />
+    <Compile Remove="Paging\PropertyResolver.cs" />
+    <Compile Remove="Paging\SortDirection.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Paging\" />
+  </ItemGroup>
+
+</Project>
