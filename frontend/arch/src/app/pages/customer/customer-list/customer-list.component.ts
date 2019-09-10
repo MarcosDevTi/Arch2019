@@ -53,8 +53,8 @@ export class CustomerListComponent implements OnInit {
 
   }
 
-  addParamSearch(event: ParamsSearch ) {
-    this.addParamSearchDistinct(event);
+  addParamSearch(...events: ParamsSearch[] ) {
+    events.forEach(event => this.addParamSearchDistinct(event));
     this.loadList();
   }
 
