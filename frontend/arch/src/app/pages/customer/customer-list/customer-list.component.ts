@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../shared/customer.service';
 import { MatDialog } from '@angular/material';
 import { ConfirmationDialog } from 'src/app/shared/dialogs/confirmation-dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-customer-list',
@@ -15,11 +16,11 @@ export class CustomerListComponent implements OnInit {
   customers;
   displayedColumns = ['firstName', 'lastName', 'email', 'address', 'birth-date'];
 
-
   search: string;
   equal: string;
 
   constructor(
+    public translate: TranslateService,
     private customerService: CustomerService,
     public dialog: MatDialog) { }
 

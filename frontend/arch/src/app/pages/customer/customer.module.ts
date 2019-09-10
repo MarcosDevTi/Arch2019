@@ -12,6 +12,7 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     MaterialModule,
     RouterModule,
-
+    TranslateModule
   ],
   entryComponents: [
     ConfirmationDialog,

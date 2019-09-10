@@ -1,0 +1,14 @@
+{
+  "APP": {
+    "LANGUAGE": "Language  en"
+  },
+  "CUSTOMERS_LIST": {
+    "TITLE": "Customers",
+    "DESCRIPTION": "List of Customers",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "EMAIL": "Email",
+    "BIRTH_DATE": "Birth Date",
+    "ADDRESS": "Address"
+  }
+}
