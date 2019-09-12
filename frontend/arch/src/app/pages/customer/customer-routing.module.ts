@@ -1,3 +1,4 @@
+import { CanDeactivateGuard } from './../../shared/_guards/can-deactivate-guard';
 import { PreventUnsavedChanges } from './../../shared/_guards/prevent-unsaved-changes.guard';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
