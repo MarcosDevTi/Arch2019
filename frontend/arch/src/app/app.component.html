@@ -11,9 +11,9 @@
     <button mat-menu-item [routerLink]="['/entries/new']" >New</button>
   </mat-menu>
 
-  <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
+  <button mat-button [matMenuTriggerFor]="beforeMenu">Tools</button>
   <mat-menu  #beforeMenu="matMenu" xPosition="before">
-    <button mat-menu-item [routerLink]="['/entries']" >List</button>
+    <button mat-menu-item [routerLink]="['/editor-text']" >Text Editor</button>
     <button mat-menu-item [routerLink]="['/entries/new']" >New</button>
   </mat-menu>
 

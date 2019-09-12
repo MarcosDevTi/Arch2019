@@ -1,3 +1,4 @@
+import { PreventUnsavedChanges } from './../../shared/_guards/prevent-unsaved-changes.guard';
 import { ParamsGridDataRangeComponent } from './../../shared/components/params-grid-data-range/params-grid-data-range.component';
 import { AutoFocusDirective } from './../../shared/directives/auto-focus.directive';
 import { ParamsGridComplexComponent } from './../../shared/components/params-grid-complex/params-grid-complex.component';
@@ -36,6 +37,9 @@ import { TranslateModule } from '@ngx-translate/core';
   entryComponents: [
     ConfirmationDialog,
     ParamsGridComplexComponent
+  ],
+  providers: [
+    PreventUnsavedChanges
   ]
 })
 export class CustomerModule { }
