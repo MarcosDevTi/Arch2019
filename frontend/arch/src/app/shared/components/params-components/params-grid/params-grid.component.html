@@ -1,19 +1,19 @@
 <div class="container-component">
-  <span class="head" *ngIf="!onOverHead" >{{head}}<button mat-button (click)="addSearchParam()"><i class="material-icons">search</i></button></span>
+  <span class="head" *ngIf="!onOverHead" >{{paramGrid[0].head}}<button mat-button (click)="addSearchParam()"><i class="material-icons">search</i></button></span>
   <div class="container" *ngIf="onOverHead" >
-     <form [formGroup]="formParamsGrid" (submit)="submitForm()">
+     <form [formGroup]="formParamsGrid">
       <mat-form-field class="input">
         <input
         appAutoFocus
         matInput
         autocomplete="off"
-        [placeholder]="placeHolder"
+        [placeholder]="paramGrid[0].head"
         formControlName='inputSearch'>
       </mat-form-field>
       <mat-form-field class="type">
         <mat-label>Comparator</mat-label>
         <mat-select formControlName="typeComparator">
-          <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+          <mat-option *ngFor="let comparator of comparatos" [value]="comparator">{{comparator}}</mat-option>
         </mat-select>
       </mat-form-field>
       <div class="actions">

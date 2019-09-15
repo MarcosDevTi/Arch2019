@@ -1,9 +1,9 @@
 import { PreventUnsavedChanges } from './../../shared/_guards/prevent-unsaved-changes.guard';
-import { ParamsGridDataRangeComponent } from './../../shared/components/params-grid-data-range/params-grid-data-range.component';
+import { ParamsGridDataRangeComponent } from '../../shared/components/params-components/params-grid-data-range/params-grid-data-range.component';
 import { AutoFocusDirective } from './../../shared/directives/auto-focus.directive';
-import { ParamsGridComplexComponent } from './../../shared/components/params-grid-complex/params-grid-complex.component';
+import { ParamsGridComplexComponent } from '../../shared/components/params-components/params-grid-complex/params-grid-complex.component';
 import { ConfirmationDialog } from 'src/app/shared/dialogs/confirmation-dialog';
-import { ParamsGridComponent } from './../../shared/components/params-grid/params-grid.component';
+import { ParamsGridComponent } from '../../shared/components/params-components/params-grid/params-grid.component';
 import { MaterialModule } from './../../shared/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, Output } from '@angular/core';
 import { EventEmitter } from 'events';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ParamsSearch } from '../../paramsSearch';
+import { ParamsSearch } from '../../../paramsSearch';
 
 @Component({
   selector: 'app-params-grid-data-range',
@@ -11,6 +11,8 @@ import { ParamsSearch } from '../../paramsSearch';
 export class ParamsGridDataRangeComponent implements OnInit {
   @Input() placeHolder;
   //@Output() public paramsSearch = new EventEmitter();
+  @Output() public paramsListSearch = new EventEmitter();
+  @Output() public paramsSearch = new EventEmitter();
   paramsComplex: ParamsSearch[] = [];
   paramsDates: ParamsSearch[] = [];
   step1 = true;
@@ -18,8 +20,6 @@ export class ParamsGridDataRangeComponent implements OnInit {
   idData = 0;
   onOverHead: boolean;
 
-  selectable = true;
-  removable = true;
   dates: any[] = [];
   componentVisibility = true;
   dateMin = null;
@@ -60,6 +60,7 @@ export class ParamsGridDataRangeComponent implements OnInit {
   }
 
   addDate(date: Date) {
+
     console.log(date);
     const objInsert = {
       id: this.idData,

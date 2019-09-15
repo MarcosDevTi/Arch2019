@@ -1,3 +1,4 @@
+import { ParamGrid } from './../../../shared/components/params-components/shared/param-grid.model';
 import { TableParamsComplex } from './../../../shared/dialogs/table-params-complex';
 import { ParamsSearch } from './../../../shared/paramsSearch';
 import { Component, OnInit } from '@angular/core';
@@ -15,6 +16,12 @@ export class CustomerListComponent implements OnInit {
   paramsSearch: ParamsSearch[] = [];
   customers;
   displayedColumns = ['firstName', 'lastName', 'email', 'address', 'birth-date'];
+  properties: ParamGrid[] = [
+    {property: 'Street', head: 'Street'},
+    {property: 'Number', head: 'Number'},
+    {property: 'City', head: 'City'},
+    {property: 'Country', head: 'Country'}
+  ];
 
   search: string;
   equal: string;
@@ -44,7 +51,6 @@ export class CustomerListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.search = result;
     });
   }
@@ -59,7 +65,6 @@ export class CustomerListComponent implements OnInit {
   }
 
   addParamsSearch(events: ParamsSearch[] ) {
-    //this.paramsSearch = [];
     events.forEach(_ =>  this.addParamSearchDistinct(_));
     this.loadList();
   }

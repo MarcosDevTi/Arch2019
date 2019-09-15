@@ -2,23 +2,23 @@
 <div class="grid-complex" *ngIf="onOverHead">
   <mat-chip-list #chipList aria-label="Fruit selection">
     <mat-chip
-      *ngFor="let fruit of fruits"
-      [selectable]="selectable"
-      [removable]="removable"
-      (removed)="remove(fruit)">
-      {{fruit.shipDisplay}}
-      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      *ngFor="let propChip of propertiesChips"
+      [selectable]="true"
+      [removable]="true"
+      (removed)="remove(propChip)">
+      {{propChip.shipDisplay}}
+      <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
 
   <div class="fild-multiple">
-    <form [formGroup]="formParamsComplexGrid" >
-      <mat-select formControlName="property">
-          <mat-option *ngFor="let prop of properties" [value]="prop">
-            {{prop.display}}
+    <form [formGroup]="formParamsGrid" >
+      <mat-select (valueChange)="setProperty($event)">
+          <mat-option *ngFor="let prop of paramGrid" [value]="prop">
+            {{prop.head}}
           </mat-option>
         </mat-select>
-        <mat-form-field *ngIf="properties.length > 0">
+        <mat-form-field *ngIf="paramGrid.length > 0">
             <input matInput formControlName="inputSearch">
           </mat-form-field>
           <mat-select  formControlName="typeComparator">
