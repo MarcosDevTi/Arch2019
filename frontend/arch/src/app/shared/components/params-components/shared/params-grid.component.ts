@@ -1,6 +1,6 @@
 import { ParamsSearch } from '../../../paramsSearch';
 import { Injector, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { ParamGrid } from './param-grid.model';
 
@@ -11,7 +11,8 @@ export abstract class ParamsGrid implements OnInit {
   @Output() public clear = new EventEmitter();
   onOverHead: boolean;
   paramSelected: any;
-  selected;
+  comparatorSelected: string;
+  comparators: string[];
 
   formParamsGrid: FormGroup;
   protected formBuilder: FormBuilder;
@@ -22,27 +23,38 @@ export abstract class ParamsGrid implements OnInit {
   ngOnInit() {
     this.onInit();
     this.buildFormParamsGrid();
+    this.setDefaultComparators();
+    this.afterOnInit();
+    this.setPropertyDefault();
     this.inputSearch.valueChanges.pipe(debounceTime(500)).subscribe(() => this.valueInputSearchChanges());
+  }
+
+  setDefaultComparators() {
+    this.comparatorSelected = 'Contains';
+    this.typeComparator.setValue('Contains');
   }
 
   buildFormParamsGrid() {
     this.formParamsGrid = this.formBuilder.group({
-      inputSearch: [null],
-      typeComparator: ['Contains']
+      inputSearch: [null, Validators.required],
+      typeComparator: [null, Validators.required],
+      property: [null, Validators.required]
     });
+  }
+
+  setPropertyDefault() {
+    if (this.paramGrid.length > 0) {
+      this.property.setValue(this.paramGrid[0].property);
+    }
   }
 
   get inputSearch() { return this.formParamsGrid.get('inputSearch'); }
   get typeComparator() { return this.formParamsGrid.get('typeComparator'); }
+  get property() { return this.formParamsGrid.get('property'); }
 
   valueInputSearchChanges() {
-    const index = this.paramGrid.findIndex(_ => _.property === this.paramSelected.property);
-    if (this.paramGrid[index]) {
-      const params: ParamsSearch = {
-        inputParam: this.inputSearch.value, typeCompare: this.typeComparator.value, property: this.paramGrid[index].property
-      };
-      this.paramsSearch.emit(params);
-    }
+    const params = ParamsSearch.fromJson(this.formParamsGrid.value);
+    this.paramsSearch.emit(params);
   }
 
   addSearchParam() {
@@ -51,12 +63,12 @@ export abstract class ParamsGrid implements OnInit {
 
   sendSearch() {
     const index = this.paramGrid.findIndex(_ => _.property === this.paramSelected.property);
-    const params: ParamsSearch = { inputParam: '', typeCompare: this.selected, property: this.paramGrid[index].property };
+    const params: ParamsSearch = { inputSearch: '', typeComparator: this.comparatorSelected, property: this.paramGrid[index].property };
     this.paramsSearch.emit(params);
   }
 
   resetParamsInputs() {
-    this.selected = 'Contains';
+    this.comparatorSelected = 'Contains';
   }
 
   clearProp() {
@@ -67,5 +79,6 @@ export abstract class ParamsGrid implements OnInit {
     this.onOverHead = false;
   }
 
-  protected abstract  onInit();
+  protected abstract onInit();
+  protected abstract afterOnInit();
 }

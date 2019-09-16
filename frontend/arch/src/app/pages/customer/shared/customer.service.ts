@@ -18,10 +18,12 @@ export class CustomerService {
   }
   getCustomersWithParams(params: ParamsSearch): Observable<CustomerItem> {
     return this.http.get<CustomerItem>(
-      `http://localhost:50058/api/customer?${params.property}=${params.inputParam}&TypeCompare_${params.property}=${params.typeCompare}`);
+      // tslint:disable-next-line: max-line-length
+      `http://localhost:50058/api/customer?${params.property}=${params.inputSearch}&TypeCompare_${params.property}=${params.typeComparator}`);
   }
 
   getCustomersWithParamsCollection(params: ParamsSearch[]): Observable<CustomerItem> {
+    console.log('service params', params)
     return this.http.get<CustomerItem>(this.buildQueryString(params));
   }
 
@@ -29,7 +31,7 @@ export class CustomerService {
     let url = 'http://localhost:50058/api/customer?';
 
     params.forEach(_ => {
-      url += `${_.property}=${_.inputParam}&TypeCompare_${_.property}=${_.typeCompare}&`;
+      url += `${_.property}=${_.inputSearch}&TypeCompare_${_.property}=${_.typeComparator}&`;
     });
     console.log('url', url.slice(0, -1));
     return url.slice(0, -1);

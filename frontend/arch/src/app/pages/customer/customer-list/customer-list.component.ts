@@ -60,6 +60,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   addParamSearch(...events: ParamsSearch[] ) {
+    console.log('events', events);
     events.forEach(event => this.addParamSearchDistinct(event));
     this.loadList();
   }
@@ -77,11 +78,11 @@ export class CustomerListComponent implements OnInit {
 
   addParamSearchDistinct(params: ParamsSearch) {
     const resultIndex = this.paramsSearch.findIndex(_ => _.property === params.property);
-    if (params.inputParam === '' || params.inputParam === null) {
+    if (params.inputSearch === '' || params.inputSearch === null) {
       this.clear(params.property);
     } else if (resultIndex !== -1) {
-      this.paramsSearch[resultIndex].inputParam = params.inputParam;
-      this.paramsSearch[resultIndex].typeCompare = params.typeCompare;
+      this.paramsSearch[resultIndex].inputSearch = params.inputSearch;
+      this.paramsSearch[resultIndex].typeComparator = params.typeComparator;
     } else {
       this.paramsSearch.push(params);
     }

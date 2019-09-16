@@ -5,27 +5,27 @@
       *ngFor="let propChip of propertiesChips"
       [selectable]="true"
       [removable]="true"
-      (removed)="remove(propChip)">
-      {{propChip.shipDisplay}}
+      (removed)="removeShip(propChip)">
+      {{propChip.display}}
       <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
 
   <div class="fild-multiple">
     <form [formGroup]="formParamsGrid" >
-      <mat-select (valueChange)="setProperty($event)">
-          <mat-option *ngFor="let prop of paramGrid" [value]="prop">
+      <mat-select formControlName="property" *ngIf="paramGrid[0]">
+          <mat-option *ngFor="let prop of paramGrid" [value]="prop.property">
             {{prop.head}}
           </mat-option>
         </mat-select>
-        <mat-form-field *ngIf="paramGrid.length > 0">
+        <mat-form-field *ngIf="paramGrid[0]">
             <input matInput formControlName="inputSearch">
           </mat-form-field>
-          <mat-select  formControlName="typeComparator">
+          <mat-select  formControlName="typeComparator" *ngIf="paramGrid[0]">
               <mat-option value="==">==</mat-option>
               <mat-option value="Contains">Contains</mat-option>
           </mat-select>
-          <button *ngIf="inputSearch.value != '' || inputSearch.value != null" type="button" mat-button (click)="addItem()"><i class="material-icons" style="color: green">add_box</i></button>
+          <button *ngIf="inputSearch.valid && paramGrid[0]" type="button" mat-button (click)="addItem()"><i class="material-icons" style="color: green">add_box</i></button>
           <button mat-button (click)="clearProp()"><i class="material-icons" style="color: red">clear</i></button>
         </form>
   </div>

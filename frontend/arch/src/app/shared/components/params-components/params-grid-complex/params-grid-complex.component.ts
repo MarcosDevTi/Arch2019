@@ -1,9 +1,11 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild, EventEmitter, Output, Injector } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { ParamsSearch } from '../../../paramsSearch';
 import { ParamsGrid } from '../shared/params-grid.component';
+import { ChipParam } from '../shared/chipParam';
+import { Tools } from '../shared/tools';
 
 @Component({
   selector: 'app-params-grid-complex',
@@ -13,73 +15,42 @@ import { ParamsGrid } from '../shared/params-grid.component';
 export class ParamsGridComplexComponent extends ParamsGrid {
   @Output() public paramsListSearch = new EventEmitter();
 
-  paramsComplex: ParamsSearch[] = [];
-
-  visible = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  propertiesChips: any[] = [];
-
-  valueInputSearch;
-  valueComparator = '==';
-  valueProperty;
-  property;
-
-  formParamsComplexGrid: FormGroup;
-
   @ViewChild('chipInput', { static: false }) chipInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+  propertiesChips: ChipParam[] = [];
 
   constructor(protected injector: Injector) { super(injector); }
 
-  onInit() {
-  }
+  onInit() { }
 
-  setProperty(event) {
-    this.paramSelected = event;
+  afterOnInit() {
+    if (this.paramGrid[0]) {
+      this.property.setValue(this.paramGrid[0].property);
+    }
   }
 
   addItem() {
-    this.paramSelected.value = this.inputSearch.value;
-    this.propertiesChips.push(
-      {
-        shipDisplay: this.paramSelected.property + ': ( ' + this.typeComparator.value + ' ) ' + this.inputSearch.value,
-        prop: this.paramSelected.property,
-        display: this.paramSelected.head
-      });
-    this.paramsComplex.push({
-      inputParam: this.inputSearch.value,
-      typeCompare: this.typeComparator.value,
-      property: this.paramSelected.property
-    });
-    this.removePropertyAdd(this.paramSelected.property);
-    this.valueProperty = this.paramSelected;
-    this.inputSearch.setValue('');
-    this.paramsListSearch.emit(this.paramsComplex);
-    this.property = this.paramSelected;
+    console.log('add item')
+    this.propertiesChips.push(this.addChip());
   }
 
-  removePropertyAdd(prop: string): void {
-    const index = this.paramGrid.findIndex(_ => _.property === prop);
-    this.paramGrid.splice(index, 1);
+  addChip(): ChipParam {
+    this.removeParamGrid();
+    return {
+      display: this.property.value + ': ( ' + this.typeComparator.value + ' ) ' + this.inputSearch.value,
+      property: this.property.value,
+      head: ''
+    };
   }
 
-  remove(propRemove): void {
-    const index = this.propertiesChips.indexOf(propRemove);
-
-    if (index >= 0) {
-      this.paramGrid.push({ property: this.propertiesChips[index].prop, head: this.propertiesChips[index].display });
-      this.clear.emit(this.paramGrid[index].property);
-      this.propertiesChips.splice(index, 1);
-      this.paramsComplex.splice(index, 1);
-    }
-
-    this.paramsListSearch.emit(this.paramsComplex);
-    const indexP = this.paramGrid.findIndex(_ => _.property === this.paramSelected.property);
-    this.property = this.paramGrid[indexP];
+  removeParamGrid() {
+    Tools.removeItem(this.paramGrid, this.property.value, 'property');
   }
 
-  selectedShip(event): void {
-    this.propertiesChips.push(event.value);
-    this.chipInput.nativeElement.value = '';
+  removeShip(propRemove): void {
+    Tools.removeItem(this.propertiesChips, propRemove);
+    console.log('property for clear', propRemove);
+    const index = this.paramGrid.findIndex(_ => _.property === propRemove.property);
+    this.clear.emit(this.paramGrid[index].property);
   }
 }

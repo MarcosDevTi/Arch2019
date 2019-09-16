@@ -127,13 +127,13 @@ namespace Arch.Handler
             return null;
         }
 
-        private TextSearch BuildPropertyText<T>(string property, string value, string comparatorValue)
+        private TextSearch BuildPropertyText<T>(string property, string inputSearch, string typeComparator)
         {
             var criteria = new TextSearch();
             criteria.Property = property;
             criteria.TargetTypeName = typeof(T).AssemblyQualifiedName;
-            criteria.SearchTerm = value;
-            criteria.Comparator = (TextComparators)Enum.Parse(typeof(TextComparators), comparatorValue); ;
+            criteria.SearchTerm = inputSearch;
+            criteria.Comparator = (TextComparators)Enum.Parse(typeof(TextComparators), typeComparator); ;
 
             return criteria;
         }

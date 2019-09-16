@@ -7,13 +7,14 @@ import { ParamsGrid } from '../shared/params-grid.component';
   styleUrls: ['./params-grid.component.scss']
 })
 export class ParamsGridComponent extends ParamsGrid {
-
-  comparatos: string[] = ['Equals', 'Contains'];
-
   constructor(protected injector: Injector) {
     super(injector);
-    this.selected = 'Contains';
   }
 
-  onInit() {}
+  onInit() {
+    this.comparators = ['Contains', 'Equals'];
+    this.paramSelected = this.paramGrid[0];
+  }
+
+  afterOnInit() {}
 }

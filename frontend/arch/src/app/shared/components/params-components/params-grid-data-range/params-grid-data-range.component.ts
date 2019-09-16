@@ -92,8 +92,8 @@ export class ParamsGridDataRangeComponent implements OnInit {
   buildParams() {
     this.dates.forEach(_ => {
       const param = {
-        inputParam: _.display,
-        typeCompare: _.comparator,
+        inputSearch: _.display,
+        typeComparator: _.comparator,
         property: _.property
       };
 
